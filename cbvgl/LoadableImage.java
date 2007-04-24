@@ -5,7 +5,7 @@ import java.io.InputStream;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class LoadableImage {
+public class LoadableImage implements Comparable<LoadableImage> {
 	private String imageFile;
 	private Image i = null;
 	private InputStream stream;
@@ -32,6 +32,10 @@ public class LoadableImage {
 			load();
 		}
 		return i;
+	}
+	
+	public String getName() {
+		return imageFile;
 	}
 	
 	public boolean isSplit() {
@@ -63,5 +67,9 @@ public class LoadableImage {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public int compareTo(LoadableImage o) {
+		return imageFile.compareTo(o.getName());
 	}
 }

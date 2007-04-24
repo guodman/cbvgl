@@ -3,6 +3,7 @@ package cbvgl;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -37,6 +38,7 @@ public class ImageList {
 						il.add(i);
 					}
 				}
+				Collections.sort(il);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
