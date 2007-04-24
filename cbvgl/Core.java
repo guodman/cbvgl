@@ -78,7 +78,17 @@ public class Core implements Game {
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		// render the current image from the image list
 		GL11.glRotatef(90f, 0.0f, 0.0f, 1.0f);
-		il.getCurrent().draw(0, -1280);
+		if (il.isCurrentSplit()) {
+			if (il.splitStatus == 0) {
+				il.getCurrent().getScaledCopy(0.5f).draw(0, -1280);
+			} else if (il.splitStatus == 1) {
+				il.getCurrent().draw(0, -1280);
+			} else if (il.splitStatus == 2) {
+				il.getCurrent().draw(-800, -1280);
+			}
+		} else {
+			il.getCurrent().draw(0, -1280);
+		}
 		String pageCount = il.getPageNumber()+1 + "/" + il.size();
 		int acfx = 800-acf.getWidth(pageCount);
 		//int acfy = -acf.getHeight(pageCount);

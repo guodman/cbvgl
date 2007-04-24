@@ -9,12 +9,12 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 public class ImageList {
 	private List<LoadableImage> il;
 	private String comicFile;
 	private int curImage;
+	public int splitStatus;
 	
 	public ImageList(String comic) {
 		comicFile = comic;
@@ -75,6 +75,10 @@ public class ImageList {
 		return il.get(curImage).getImage();
 	}
 	
+	public boolean isCurrentSplit() {
+		return il.get(curImage).isSplit();
+	}
+	
 	public void preload() {
 		if (curImage < il.size()-1) {
 			il.get(curImage+1).getImage();
@@ -82,14 +86,30 @@ public class ImageList {
 	}
 	
 	public void next() {
-		if (curImage < il.size()-1) {
-			curImage++;
+		if (isCurrentSplit()) {
+			if (splitStatus <= 1) {
+				splitStatus++;
+			} else {
+				if (curImage < il.size()-1) {
+					splitStatus = 0;
+					curImage++;
+				}
+			}
+		} else {
+			if (curImage < il.size()-1) {
+				curImage++;
+			}
 		}
 	}
 	
 	public void previous() {
-		if (curImage > 0) {
+		if (splitStatus > 0) {
+			splitStatus--;
+		} else if (curImage > 0) {
 			curImage--;
+			if (isCurrentSplit()) {
+				splitStatus = 2;
+			}
 		}
 	}
 }
