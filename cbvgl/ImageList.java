@@ -32,7 +32,7 @@ public class ImageList {
 				while (pages.hasMoreElements()) {
 					ZipEntry z = pages.nextElement();
 					System.out.println("   " + z.getName());
-					if (!z.isDirectory()) {
+					if (!z.isDirectory() && z.getName().toLowerCase().endsWith("jpg")) {
 						LoadableImage i = new LoadableImage(z.getName(), zf.getInputStream(z));
 						il.add(i);
 					}
