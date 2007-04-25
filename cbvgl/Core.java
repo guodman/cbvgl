@@ -2,8 +2,11 @@ package cbvgl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -103,6 +106,9 @@ public class Core implements Game {
 		g.setColor(new Color(255, 0, 0));
 		g.fill(new Rectangle(0, acfy, ((float)(il.getPageNumber()+1)/(float)il.size())*((float)acfx-2f), acf.getHeight(pageCount)));
 		acf.drawString(acfx-2, acfy, pageCount, Color.black);
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("CST"));
+		String time = cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE);
+		acf.drawString(acfx-(acf.getWidth(time)+6), acfy, time, Color.black);
 		acf.drawString(2, acfy, il.getFileName(), Color.black);
 	}
 
