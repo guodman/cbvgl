@@ -22,6 +22,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
 public class Core implements Game {
+	public static final String version = "0.1";
 	private GameContainer gc;
 	private String comic;
 	private ImageList il;
@@ -29,6 +30,7 @@ public class Core implements Game {
 	AngelCodeFont acf;
 
 	public static void main(String[] args) {
+		System.out.println("cbvgl version: " + version);
 		JFileChooser fileFinder = new JFileChooser();
 		File comicdir = new File(System.getProperty("user.home") + "/comic");
 		if (comicdir.exists()) {
@@ -37,6 +39,7 @@ public class Core implements Game {
 			fileFinder.setCurrentDirectory(new File(System.getProperty("user.home")));
 		}
 		fileFinder.setMultiSelectionEnabled(false);
+		fileFinder.setDialogTitle("cbvgl version " + version);
 		fileFinder.setFileFilter(new ComicArchiveFilter());
 		fileFinder.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		int result = fileFinder.showOpenDialog(null);
