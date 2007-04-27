@@ -107,7 +107,21 @@ public class Core implements Game {
 		g.fill(new Rectangle(0, acfy, ((float)(il.getPageNumber()+1)/(float)il.size())*((float)acfx-2f), acf.getHeight(pageCount)));
 		acf.drawString(acfx-2, acfy, pageCount, Color.black);
 		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("CST"));
-		String time = cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE);
+		int hour = cal.get(Calendar.HOUR);
+		String hourString = "";
+		if (hour == 0) {
+			hourString = "12";
+		} else {
+			hourString = hour + "";
+		}
+		int minute = cal.get(Calendar.MINUTE);
+		String minuteString = "";
+		if (minute < 10) {
+			minuteString = "0" + minute;
+		} else {
+			minuteString = minute + "";
+		}
+		String time = hourString + ":" + minuteString;
 		acf.drawString(acfx-(acf.getWidth(time)+6), acfy, time, Color.black);
 		acf.drawString(2, acfy, il.getFileName(), Color.black);
 	}
