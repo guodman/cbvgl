@@ -22,7 +22,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
 public class Core implements Game {
-	public static final String version = "0.1";
+	public static final String version = "0.1.1";
 	private GameContainer gc;
 	private String comic;
 	private ImageList il;
