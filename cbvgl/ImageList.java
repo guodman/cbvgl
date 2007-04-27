@@ -33,7 +33,9 @@ public class ImageList {
 				while (pages.hasMoreElements()) {
 					ZipEntry z = pages.nextElement();
 					System.out.println("   " + z.getName());
-					if (!z.isDirectory() && z.getName().toLowerCase().endsWith("jpg")) {
+					if (!z.isDirectory() && (z.getName().toLowerCase().endsWith("jpg")
+							|| z.getName().toLowerCase().endsWith("png")
+							|| z.getName().toLowerCase().endsWith("gif"))) {
 						LoadableImage i = new LoadableImage(z.getName(), zf.getInputStream(z));
 						il.add(i);
 					}
