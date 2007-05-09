@@ -97,11 +97,11 @@ public class Core implements Game {
 		//int acfy = -acf.getHeight(pageCount);
 		int acfy = -acf.getLineHeight();
 		g.setColor(Color.lightGray);
-		g.fill(new Rectangle(acfx-2, acfy, acf.getWidth(pageCount)+2, acf.getHeight(pageCount)));
+		g.fillRect(acfx-2, acfy, acf.getWidth(pageCount)+2, acf.getHeight(pageCount));
 		g.setColor(new Color(128, 0, 0));
-		g.fill(new Rectangle(0, acfy, acfx-2, acf.getHeight(pageCount)));
+		g.fillRect(0, acfy, acfx-2, acf.getHeight(pageCount));
 		g.setColor(new Color(255, 0, 0));
-		g.fill(new Rectangle(0, acfy, ((float)(il.getPageNumber()+1)/(float)il.size())*((float)acfx-2f), acf.getHeight(pageCount)));
+		g.fillRect(0, acfy, ((float)(il.getPageNumber()+1)/(float)il.size())*((float)acfx-2f), acf.getHeight(pageCount));
 		acf.drawString(acfx-2, acfy, pageCount, Color.black);
 		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("CST"));
 		int hour = cal.get(Calendar.HOUR);
