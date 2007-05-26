@@ -19,7 +19,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
 public class Core implements Game {
 	public static final String version = "0.1.1";
