@@ -9,8 +9,6 @@ import java.util.TimeZone;
 
 import javax.swing.JFileChooser;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.AngelCodeFont;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Color;
@@ -79,7 +77,8 @@ public class Core implements Game {
 
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		// render the current image from the image list
-		GL11.glRotatef(90f, 0.0f, 0.0f, 1.0f);
+		//GL11.glRotatef(90f, 0.0f, 0.0f, 1.0f);
+		g.rotate(0f, 0f, (float)(90));
 		if (il.isCurrentSplit()) {
 			if (il.splitStatus == 0) {
 				il.getCurrent().getScaledCopy(0.5f).draw(0, -1280);
@@ -140,13 +139,13 @@ public class Core implements Game {
 	}
 
 	public void keyPressed(int arg0, char arg1) {
-		if (arg0 == Keyboard.KEY_ESCAPE
-				|| arg0 == Keyboard.KEY_Q) {
+		if (arg0 == Input.KEY_ESCAPE
+				|| arg0 == Input.KEY_Q) {
 			gc.exit();
-		} else if (arg0 == Keyboard.KEY_RETURN
-				|| arg0 == Keyboard.KEY_F
-				|| arg0 == Keyboard.KEY_F1
-				|| arg0 == Keyboard.KEY_F11) {
+		} else if (arg0 == Input.KEY_RETURN
+				|| arg0 == Input.KEY_F
+				|| arg0 == Input.KEY_F1
+				|| arg0 == Input.KEY_F11) {
 			if (gc instanceof AppGameContainer) {
 				try {
 					AppGameContainer agc = (AppGameContainer) gc;
@@ -155,18 +154,18 @@ public class Core implements Game {
 					e.printStackTrace();
 				}
 			}
-		} else if (arg0 == Keyboard.KEY_DOWN
-				|| arg0 == Keyboard.KEY_NEXT
-				|| arg0 == Keyboard.KEY_SPACE) {
+		} else if (arg0 == Input.KEY_DOWN
+				|| arg0 == Input.KEY_NEXT
+				|| arg0 == Input.KEY_SPACE) {
 			il.next();
 			justChanged = true;
-		} else if (arg0 == Keyboard.KEY_UP
-				|| arg0 == Keyboard.KEY_PRIOR
-				|| arg0 == Keyboard.KEY_BACK) {
+		} else if (arg0 == Input.KEY_UP
+				|| arg0 == Input.KEY_PRIOR
+				|| arg0 == Input.KEY_BACK) {
 			il.previous();
-		} else if (arg0 == Keyboard.KEY_N) {
+		} else if (arg0 == Input.KEY_N) {
 			changeComic(il.getFileName(), 1);
-		} else if (arg0 == Keyboard.KEY_P) {
+		} else if (arg0 == Input.KEY_P) {
 			changeComic(il.getFileName(), -1);
 		}
 	}
