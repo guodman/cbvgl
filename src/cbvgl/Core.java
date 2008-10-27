@@ -20,6 +20,8 @@ import org.newdawn.slick.SlickException;
 
 public class Core implements Game {
 	public static final String version = "0.1.1";
+	public static final int resWidth = 1440;
+	public static final int resHeight = 900;
 	private GameContainer gc;
 	private String comic;
 	private ImageList il;
@@ -33,7 +35,8 @@ public class Core implements Game {
 		if (comicdir.exists()) {
 			fileFinder.setCurrentDirectory(comicdir);
 		} else {
-			fileFinder.setCurrentDirectory(new File(System.getProperty("user.home")));
+			fileFinder.setCurrentDirectory(new File(System
+					.getProperty("user.home")));
 		}
 		fileFinder.setMultiSelectionEnabled(false);
 		fileFinder.setDialogTitle("cbvgl version " + version);
@@ -45,7 +48,8 @@ public class Core implements Game {
 			System.out.println(fileFinder.getSelectedFile().getParent());
 			Core c = new Core(fileFinder.getSelectedFile().getAbsolutePath());
 			try {
-				AppGameContainer gc = new AppGameContainer(c, 1280, 800, false);
+				AppGameContainer gc = new AppGameContainer(c, resWidth,
+						resHeight, false);
 				gc.setFullscreen(true);
 				gc.start();
 			} catch (SlickException e) {
@@ -69,7 +73,7 @@ public class Core implements Game {
 	}
 
 	public void init(GameContainer arg0) throws SlickException {
-		acf = new AngelCodeFont("/jar/font/BitstreamVeraSansMono14B.fnt", "/jar/font/BitstreamVeraSansMono14B.png");
+		acf = new AngelCodeFont("res/Arial14B.fnt", "res/Arial14B.png");
 		gc = arg0;
 		// create the image list
 		il = new ImageList(comic);
@@ -77,30 +81,33 @@ public class Core implements Game {
 
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		// render the current image from the image list
-		//GL11.glRotatef(90f, 0.0f, 0.0f, 1.0f);
-		g.rotate(0f, 0f, (float)(90));
+		// GL11.glRotatef(90f, 0.0f, 0.0f, 1.0f);
+		g.rotate(0f, 0f, (float) (90));
 		if (il.isCurrentSplit()) {
 			if (il.splitStatus == 0) {
-				il.getCurrent().getScaledCopy(0.5f).draw(0, -1280);
+				il.getCurrent().getScaledCopy(0.5f).draw(0, -resWidth);
 			} else if (il.splitStatus == 1) {
-				il.getCurrent().draw(0, -1280);
+				il.getCurrent().draw(0, -resWidth);
 			} else if (il.splitStatus == 2) {
-				il.getCurrent().draw(-800, -1280);
+				il.getCurrent().draw(-resHeight, -resWidth);
 			}
 		} else {
-			il.getCurrent().draw(0, -1280);
+			il.getCurrent().draw(0, -resWidth);
 		}
-		String pageCount = il.getPageNumber()+1 + "/" + il.size();
-		int acfx = 800-acf.getWidth(pageCount);
-		//int acfy = -acf.getHeight(pageCount);
+		String pageCount = il.getPageNumber() + 1 + "/" + il.size();
+		int acfx = resHeight - acf.getWidth(pageCount);
+		// int acfy = -acf.getHeight(pageCount);
 		int acfy = -acf.getLineHeight();
 		g.setColor(Color.lightGray);
-		g.fillRect(acfx-2, acfy, acf.getWidth(pageCount)+2, acf.getHeight(pageCount));
+		g.fillRect(acfx - 2, acfy, acf.getWidth(pageCount) + 2, acf
+				.getHeight(pageCount));
 		g.setColor(new Color(128, 0, 0));
-		g.fillRect(0, acfy, acfx-2, acf.getHeight(pageCount));
+		g.fillRect(0, acfy, acfx - 2, acf.getHeight(pageCount));
 		g.setColor(new Color(255, 0, 0));
-		g.fillRect(0, acfy, ((float)(il.getPageNumber()+1)/(float)il.size())*((float)acfx-2f), acf.getHeight(pageCount));
-		acf.drawString(acfx-2, acfy, pageCount, Color.black);
+		g.fillRect(0, acfy, ((float) (il.getPageNumber() + 1) / (float) il
+				.size())
+				* ((float) acfx - 2f), acf.getHeight(pageCount));
+		acf.drawString(acfx - 2, acfy, pageCount, Color.black);
 		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("CST"));
 		int hour = cal.get(Calendar.HOUR);
 		String hourString = "";
@@ -117,7 +124,9 @@ public class Core implements Game {
 			minuteString = minute + "";
 		}
 		String time = hourString + ":" + minuteString;
-		acf.drawString(acfx-(acf.getWidth(time)+6), acfy, time, Color.black);
+		acf
+				.drawString(acfx - (acf.getWidth(time) + 6), acfy, time,
+						Color.black);
 		acf.drawString(2, acfy, il.getFileName(), Color.black);
 	}
 
@@ -139,13 +148,10 @@ public class Core implements Game {
 	}
 
 	public void keyPressed(int arg0, char arg1) {
-		if (arg0 == Input.KEY_ESCAPE
-				|| arg0 == Input.KEY_Q) {
+		if (arg0 == Input.KEY_ESCAPE || arg0 == Input.KEY_Q) {
 			gc.exit();
-		} else if (arg0 == Input.KEY_RETURN
-				|| arg0 == Input.KEY_F
-				|| arg0 == Input.KEY_F1
-				|| arg0 == Input.KEY_F11) {
+		} else if (arg0 == Input.KEY_RETURN || arg0 == Input.KEY_F
+				|| arg0 == Input.KEY_F1 || arg0 == Input.KEY_F11) {
 			if (gc instanceof AppGameContainer) {
 				try {
 					AppGameContainer agc = (AppGameContainer) gc;
@@ -154,13 +160,11 @@ public class Core implements Game {
 					e.printStackTrace();
 				}
 			}
-		} else if (arg0 == Input.KEY_DOWN
-				|| arg0 == Input.KEY_NEXT
+		} else if (arg0 == Input.KEY_DOWN || arg0 == Input.KEY_NEXT
 				|| arg0 == Input.KEY_SPACE) {
 			il.next();
 			justChanged = true;
-		} else if (arg0 == Input.KEY_UP
-				|| arg0 == Input.KEY_PRIOR
+		} else if (arg0 == Input.KEY_UP || arg0 == Input.KEY_PRIOR
 				|| arg0 == Input.KEY_BACK) {
 			il.previous();
 		} else if (arg0 == Input.KEY_N) {
@@ -169,7 +173,7 @@ public class Core implements Game {
 			changeComic(il.getFileName(), -1);
 		}
 	}
-	
+
 	private void changeComic(String curComic, int delta) {
 		File cur = new File(curComic);
 		File dir = cur.getParentFile();
@@ -182,7 +186,8 @@ public class Core implements Game {
 		}
 		Collections.sort(optl);
 		System.out.println("Current comic book: " + cur.getName());
-		System.out.println("Loading next comic book in " + dir.getAbsolutePath());
+		System.out.println("Loading next comic book in "
+				+ dir.getAbsolutePath());
 		while (!found) {
 			System.out.println("   " + optl.get(i));
 			if (cur.getName().equalsIgnoreCase(optl.get(i))) {
@@ -190,12 +195,14 @@ public class Core implements Game {
 			}
 			i++;
 		}
-		int nextNumber = i+delta-1;
+		int nextNumber = i + delta - 1;
 		if (nextNumber < 0 || nextNumber >= optl.size()) {
-			System.out.println("Proposal: " + nextNumber + "/" + optl.size() + ", not changing");
+			System.out.println("Proposal: " + nextNumber + "/" + optl.size()
+					+ ", not changing");
 		} else {
 			System.out.println("   " + optl.get(nextNumber));
-			il = new ImageList(dir.getAbsolutePath() + "/" + optl.get(nextNumber));
+			il = new ImageList(dir.getAbsolutePath() + "/"
+					+ optl.get(nextNumber));
 			justChanged = true;
 		}
 	}
@@ -209,26 +216,57 @@ public class Core implements Game {
 		} else if (button == 2) {
 			if (il.getPageNumber() == 0) {
 				changeComic(il.getFileName(), -1);
-			} else if (il.getPageNumber() == il.size()-1) {
+			} else if (il.getPageNumber() == il.size() - 1) {
 				changeComic(il.getFileName(), 1);
 			}
 		}
 	}
 
-	public void controllerButtonPressed(int arg0, int arg1) {}
-	public void controllerButtonReleased(int arg0, int arg1) {}
-	public void controllerDownPressed(int arg0) {}
-	public void controllerDownReleased(int arg0) {}
-	public void controllerLeftPressed(int arg0) {}
-	public void controllerLeftReleased(int arg0) {}
-	public void controllerRightPressed(int arg0) {}
-	public void controllerRightReleased(int arg0) {}
-	public void controllerUpPressed(int arg0) {}
-	public void controllerUpReleased(int arg0) {}
-	public void inputEnded() {}
-	public void keyReleased(int arg0, char arg1) {}
-	public void mouseMoved(int arg0, int arg1, int arg2, int arg3) {}
-	public void mouseReleased(int arg0, int arg1, int arg2) {}
-	public void mouseWheelMoved(int arg0) {}
-	public void setInput(Input arg0) {}
+	public void controllerButtonPressed(int arg0, int arg1) {
+	}
+
+	public void controllerButtonReleased(int arg0, int arg1) {
+	}
+
+	public void controllerDownPressed(int arg0) {
+	}
+
+	public void controllerDownReleased(int arg0) {
+	}
+
+	public void controllerLeftPressed(int arg0) {
+	}
+
+	public void controllerLeftReleased(int arg0) {
+	}
+
+	public void controllerRightPressed(int arg0) {
+	}
+
+	public void controllerRightReleased(int arg0) {
+	}
+
+	public void controllerUpPressed(int arg0) {
+	}
+
+	public void controllerUpReleased(int arg0) {
+	}
+
+	public void inputEnded() {
+	}
+
+	public void keyReleased(int arg0, char arg1) {
+	}
+
+	public void mouseMoved(int arg0, int arg1, int arg2, int arg3) {
+	}
+
+	public void mouseReleased(int arg0, int arg1, int arg2) {
+	}
+
+	public void mouseWheelMoved(int arg0) {
+	}
+
+	public void setInput(Input arg0) {
+	}
 }
