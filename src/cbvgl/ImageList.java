@@ -48,21 +48,6 @@ public class ImageList {
 		}
 	}
 	
-	private void loadDir(String dir) {
-		File f = new File(dir);
-		if (f.exists() && f.isDirectory() && f.canRead()) {
-			String[] pages = f.list();
-			System.out.println("Loading files:");
-			for (String s : pages) {
-				System.out.println("   " + s);
-			}
-			for (String s : pages) {
-				LoadableImage i = new LoadableImage(f.getAbsolutePath() + "/" + s);
-				il.add(i);
-			}
-		}
-	}
-	
 	public String getFileName() {
 		return comicFile;
 	}
