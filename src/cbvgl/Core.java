@@ -16,9 +16,10 @@ import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.InputListener;
 import org.newdawn.slick.SlickException;
 
-public class Core implements Game {
+public class Core implements Game, InputListener {
 	public static final String version = "0.1.1";
 	public static final int resWidth = 1440;
 	public static final int resHeight = 900;
@@ -268,5 +269,9 @@ public class Core implements Game {
 	}
 
 	public void setInput(Input arg0) {
+	}
+
+	@Override
+	public void mouseClicked(int arg0, int arg1, int arg2, int arg3) {
 	}
 }
