@@ -1,0 +1,6 @@
+To change the resolution, open cbvgl.Core and change the resWidth and resHeight lines to the width and height that you would like.
+
+Running the application:
+java -Djava.library.path=/path/to/natives/ -Xmx256m -jar cbvgl.jar
+
+If you experience out of memory errors, you can increase the maximum heap size by changing the number after the -Xmx.
