@@ -21,8 +21,8 @@ import org.newdawn.slick.SlickException;
 
 public class Core implements Game, InputListener {
 	public static final String version = "0.1.1";
-	public static final int resWidth = 1440;
-	public static final int resHeight = 900;
+	public static final int resWidth = 800;
+	public static final int resHeight = 480;
 	private GameContainer gc;
 	private String comic;
 	private ImageList il;
@@ -52,6 +52,7 @@ public class Core implements Game, InputListener {
 				AppGameContainer gc = new AppGameContainer(c, resWidth,
 						resHeight, false);
 				gc.setFullscreen(true);
+				gc.setShowFPS(false);
 				gc.start();
 			} catch (SlickException e) {
 				e.printStackTrace();
@@ -65,24 +66,25 @@ public class Core implements Game, InputListener {
 		this.comic = comic;
 	}
 
+	@Override
 	public boolean closeRequested() {
 		return true;
 	}
 
+	@Override
 	public String getTitle() {
 		return "cbvgl";
 	}
 
+	@Override
 	public void init(GameContainer arg0) throws SlickException {
 		acf = new AngelCodeFont("res/Arial14B.fnt", "res/Arial14B.png");
 		gc = arg0;
-		// create the image list
 		il = new ImageList(comic);
 	}
 
+	@Override
 	public void render(GameContainer gc, Graphics g) throws SlickException {
-		// render the current image from the image list
-		// GL11.glRotatef(90f, 0.0f, 0.0f, 1.0f);
 		g.rotate(0f, 0f, (float) (90));
 		if (il.isCurrentSplit()) {
 			if (il.splitStatus == 0) {
@@ -97,7 +99,6 @@ public class Core implements Game, InputListener {
 		}
 		String pageCount = il.getPageNumber() + 1 + "/" + il.size();
 		int acfx = resHeight - acf.getWidth(pageCount);
-		// int acfy = -acf.getHeight(pageCount);
 		int acfy = -acf.getLineHeight();
 		g.setColor(Color.lightGray);
 		g.fillRect(acfx - 2, acfy, acf.getWidth(pageCount) + 2, acf
@@ -131,6 +132,7 @@ public class Core implements Game, InputListener {
 		acf.drawString(2, acfy, il.getFileName(), Color.black);
 	}
 
+	@Override
 	public void update(GameContainer arg0, int arg1) throws SlickException {
 		try {
 			Thread.sleep(100);
@@ -144,10 +146,12 @@ public class Core implements Game, InputListener {
 		}
 	}
 
+	@Override
 	public boolean isAcceptingInput() {
 		return true;
 	}
 
+	@Override
 	public void keyPressed(int arg0, char arg1) {
 		if (arg0 == Input.KEY_ESCAPE || arg0 == Input.KEY_Q) {
 			gc.exit();
@@ -208,6 +212,7 @@ public class Core implements Game, InputListener {
 		}
 	}
 
+	@Override
 	public void mousePressed(int button, int x, int y) {
 		if (button == 0) {
 			il.next();
@@ -223,51 +228,67 @@ public class Core implements Game, InputListener {
 		}
 	}
 
+	@Override
 	public void controllerButtonPressed(int arg0, int arg1) {
 	}
 
+	@Override
 	public void controllerButtonReleased(int arg0, int arg1) {
 	}
 
+	@Override
 	public void controllerDownPressed(int arg0) {
 	}
 
+	@Override
 	public void controllerDownReleased(int arg0) {
 	}
 
+	@Override
 	public void controllerLeftPressed(int arg0) {
 	}
 
+	@Override
 	public void controllerLeftReleased(int arg0) {
 	}
 
+	@Override
 	public void controllerRightPressed(int arg0) {
 	}
 
+	@Override
 	public void controllerRightReleased(int arg0) {
 	}
 
+	@Override
 	public void controllerUpPressed(int arg0) {
 	}
 
+	@Override
 	public void controllerUpReleased(int arg0) {
 	}
 
+	@Override
 	public void inputEnded() {
 	}
 
+	@Override
 	public void keyReleased(int arg0, char arg1) {
 	}
 
+	@Override
 	public void mouseMoved(int arg0, int arg1, int arg2, int arg3) {
 	}
 
+	@Override
 	public void mouseReleased(int arg0, int arg1, int arg2) {
 	}
 
+	@Override
 	public void mouseWheelMoved(int arg0) {
 	}
 
+	@Override
 	public void setInput(Input arg0) {
 	}
 
