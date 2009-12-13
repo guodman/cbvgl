@@ -21,8 +21,8 @@ import org.newdawn.slick.SlickException;
 
 public class Core implements Game, InputListener {
 	public static final String version = "0.1.1";
-	public static final int resWidth = 1440;
-	public static final int resHeight = 900;
+	public static final int resWidth = 800;
+	public static final int resHeight = 480;
 	private GameContainer gc;
 	private String comic;
 	private ImageList il;
