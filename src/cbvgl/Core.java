@@ -21,8 +21,8 @@ import org.newdawn.slick.SlickException;
 
 public class Core implements Game, InputListener {
 	public static final String version = "0.1.1";
-	public static final int resWidth = 800;
-	public static final int resHeight = 480;
+	public static final int resWidth = 1440;
+	public static final int resHeight = 900;
 	private GameContainer gc;
 	private String comic;
 	private ImageList il;
@@ -176,6 +176,39 @@ public class Core implements Game, InputListener {
 			changeComic(il.getFileName(), 1);
 		} else if (arg0 == Input.KEY_P) {
 			changeComic(il.getFileName(), -1);
+		} else if (arg0 == Input.KEY_GRAVE) {
+			il.gotoPage(0);
+			justChanged = true;
+		} else if (arg0 == Input.KEY_1) {
+			il.gotoPage((int) (il.size() * 0.1));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_2) {
+			il.gotoPage((int) (il.size() * 0.2));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_3) {
+			il.gotoPage((int) (il.size() * 0.3));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_4) {
+			il.gotoPage((int) (il.size() * 0.4));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_5) {
+			il.gotoPage((int) (il.size() * 0.5));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_6) {
+			il.gotoPage((int) (il.size() * 0.6));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_7) {
+			il.gotoPage((int) (il.size() * 0.7));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_8) {
+			il.gotoPage((int) (il.size() * 0.8));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_9) {
+			il.gotoPage((int) (il.size() * 0.9));
+			justChanged = true;
+		} else if (arg0 == Input.KEY_0) {
+			il.gotoPage(il.size() - 1);
+			justChanged = true;
 		}
 	}
 

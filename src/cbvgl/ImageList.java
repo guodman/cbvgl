@@ -101,4 +101,14 @@ public class ImageList {
 			}
 		}
 	}
+	
+	public void gotoPage(int page) {
+		if (page < il.size() && page >= 0) {
+			curImage = page;
+		} else if (page < 0) {
+			curImage = 0;
+		} else if (page >= il.size()) {
+			curImage = il.size()-1;
+		}
+	}
 }
