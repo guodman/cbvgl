@@ -4,6 +4,7 @@ import java.io.InputStream;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.opengl.pbuffer.GraphicsFactory;
 
 public class LoadableImage implements Comparable<LoadableImage> {
 	private final float resWidth;
@@ -46,6 +47,18 @@ public class LoadableImage implements Comparable<LoadableImage> {
 
 	public boolean isSplit() {
 		return splitPage;
+	}
+
+	public void cleanMem() {
+		try {
+			if (i != null) {
+				GraphicsFactory.releaseGraphicsForImage(i);
+				i = null;
+			}
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void load() {

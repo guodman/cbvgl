@@ -68,6 +68,15 @@ public class ImageList {
 		return il.get(curImage).isSplit();
 	}
 	
+	public void cleanMem() {
+		int threshold = 2;
+		for (int i = 0; i < il.size(); i++) {
+			if (i < (curImage - threshold) || i > (curImage + threshold)) {
+				il.get(i).cleanMem();
+			}
+		}
+	}
+	
 	public void preload() {
 		if (curImage < il.size()-1) {
 			il.get(curImage+1).getImage();
@@ -89,6 +98,7 @@ public class ImageList {
 				curImage++;
 			}
 		}
+		cleanMem();
 	}
 	
 	public void previous() {
@@ -100,6 +110,7 @@ public class ImageList {
 				splitStatus = 2;
 			}
 		}
+		cleanMem();
 	}
 	
 	public void gotoPage(int page) {
@@ -110,5 +121,6 @@ public class ImageList {
 		} else if (page >= il.size()) {
 			curImage = il.size()-1;
 		}
+		cleanMem();
 	}
 }
